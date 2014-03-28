@@ -23,7 +23,12 @@ public class ManageredEditor extends Scene {
 	private int rackSize;
 	private String sercereditorid;
 	private List<String> units;
+	private User currentUser;
 	
+
+	public ManageredEditor(User u) {
+		this.currentUser = u;
+	}
 
 	@Override
 	public void start() {
@@ -31,7 +36,7 @@ public class ManageredEditor extends Scene {
 		sercereditorid = Framework.getSceneManager().registerScene(new ServerEditor()).getId();
 		System.out.println(sercereditorid);
 		backround = new BackRound("data/datacenter.png", new Vector2(0, 0));
-		rackSize = Framework.getUserManager().getCurrentUsers()[0].getRackSize();
+		rackSize = currentUser.getRackSize();
 		for(int i = 0; i < rackSize; i++) {
 			Framework.getEntityManager().addEntity(new Server(this));
 			//((Server) e).setSpot(22);
@@ -64,7 +69,7 @@ public class ManageredEditor extends Scene {
 					
 					if(b) {
 						units.clear();
-						if(Framework.getUserManager().getCurrentUsers()[0].hasPermission(Action.READ, "U"+s.getUSpot())) {
+						if(currentUser.hasPermission(Action.READ, "U"+s.getUSpot())) {
 							System.out.println("Opening server " + s.getUSpot());
 							units.add("Opening U"+s.getUSpot());
 							((ServerEditor) Framework.getSceneManager().getSceneById(sercereditorid)).load(this, s);

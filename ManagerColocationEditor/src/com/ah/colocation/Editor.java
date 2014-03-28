@@ -24,7 +24,7 @@ public class Editor implements ApplicationListener {
 		u.addPermission("U10", Action.READ);
 		u.addPermission("U10", Action.WRITE);
 		
-		Framework.getSceneManager().setSceneRunning(Framework.getSceneManager().registerScene(new ManageredEditor()), true);
+		Framework.getSceneManager().setSceneRunning(Framework.getSceneManager().registerScene(new ManageredEditor(u)), true);
 
 	}
 
