@@ -1,0 +1,65 @@
+package com.ah.colocation.managered.server.motherboard;
+
+import com.ah.colocation.managered.server.Part;
+import com.ah.colocation.managered.server.Server;
+import com.ah.colocation.managered.server.caze.Case;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Vector2;
+
+public class MBDX9SCLFO extends MotherBoard {
+	
+	private Texture texture;
+
+	public MBDX9SCLFO(Server server) {
+		super(server);
+		texture = new Texture("data/MBDX9SCLFO.png");
+	}
+
+	@Override
+	public FormFactor getFormFactor() {
+		return FormFactor.MICROATX;
+	}
+
+	@Override
+	public Vector2 getCpuPosition(int spot) {
+		if(spot != 1) {
+			return null;
+		}
+		return new Vector2(100, 100);
+	}
+
+	@Override
+	public Vector2 getRamPostion(int spot) {
+		return new Vector2(spot * 50 + 200, 300);
+	}
+
+	@Override
+	public Texture getTexture() {
+		return texture;
+	}
+
+	@Override
+	public int getLayer() {
+		return 2;
+	}
+
+	@Override
+	public Vector2 getPostion() {
+		return ((Case)getServer().getPart("case")).getMotherBoardSpot();
+	}
+
+	@Override
+	public String getName() {
+		return "Supermicro MBD-X9SCL+-F-O";
+	}
+
+	@Override
+	public Part clone(Server server) {
+		if(getServer() != null) {
+			return null;
+		}
+		MBDX9SCLFO p = new MBDX9SCLFO(server);
+		return p;
+	}
+
+}
