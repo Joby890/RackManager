@@ -65,6 +65,7 @@ public class Server extends Entity {
 	
 	public void setSpot(Unit u) {
 		this.u = u;
+		u.setServer(this);
 		//Make sure we change the postion of the vector
 		postion = new Vector2(900, u.getSpot() * 20 + 10);
 	}
