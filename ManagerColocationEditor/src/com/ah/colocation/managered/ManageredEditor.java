@@ -8,6 +8,7 @@ import com.ah.colocation.managered.server.edit.ServerEditor;
 import com.ah.framework.BackRound;
 import com.ah.framework.Entity;
 import com.ah.framework.Framework;
+import com.ah.framework.Rack;
 import com.ah.framework.Scene;
 import com.ah.framework.User;
 import com.ah.framework.permission.Action;
@@ -20,7 +21,7 @@ import com.badlogic.gdx.math.Vector2;
 public class ManageredEditor extends Scene {
 	
 	private BackRound backround;
-	private int rackSize;
+	private Rack rack;
 	private String sercereditorid;
 	private List<String> units;
 	private User currentUser;
@@ -36,9 +37,10 @@ public class ManageredEditor extends Scene {
 		sercereditorid = Framework.getSceneManager().registerScene(new ServerEditor()).getId();
 		System.out.println(sercereditorid);
 		backround = new BackRound("data/datacenter.png", new Vector2(0, 0));
-		rackSize = currentUser.getRackSize();
-		for(int i = 0; i < rackSize; i++) {
-			Framework.getEntityManager().addEntity(new Server(this));
+		rack = new Rack(currentUser.getRackSize());
+		for(int i = 0; i < rack.getRackSize(); i++) {
+			Server ser = (Server) Framework.getEntityManager().addEntity(new Server(this));
+			ser.setSpot(rack.getUnit(i));
 			//((Server) e).setSpot(22);
 			//System.out.println(((Server) e).getUSpot());
 		}
@@ -90,8 +92,13 @@ public class ManageredEditor extends Scene {
 		return i > min && i < max;
 	}
 	
+	@Deprecated
 	public int getRackSize() {
-		return rackSize;
+		return rack.getRackSize();
+	}
+	
+	public Rack getRack() {
+		return rack;
 	}
 
 	@Override

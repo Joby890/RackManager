@@ -1,16 +1,13 @@
 package com.ah.colocation.managered.server;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import com.ah.colocation.managered.server.caze.CSE512L200B;
-import com.ah.colocation.managered.server.motherboard.MBDX9SCLFO;
 import com.ah.colocation.managered.server.parts.cpu.E31230V2;
 import com.ah.framework.Entity;
-import com.ah.framework.Framework;
 import com.ah.framework.Scene;
+import com.ah.framework.Unit;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
@@ -19,7 +16,7 @@ public class Server extends Entity {
 
 	private Texture texture;
 	private Vector2 postion;
-	private int uSpot = -1;
+	private Unit u;
 	private Map<String, Part> currentParts = new HashMap<String	, Part>();
 	
 	public Server(Scene scene) {
@@ -38,9 +35,8 @@ public class Server extends Entity {
 
 	@Override
 	public void onCreate() {
-		uSpot = Framework.getEntityManager().getEntityWithClass(Server.class).length + 1;
-		postion = new Vector2(900, uSpot * 20 + 10);
-		setSpot(uSpot);
+		//uSpot = Framework.getEntityManager().getEntityWithClass(Server.class).length + 1;
+
 		texture = new Texture("data/server.png");
 		currentParts.put("cpu", new E31230V2(this));
 		//currentParts.put("motherboard", new MBDX9SCLFO(this));
@@ -64,13 +60,13 @@ public class Server extends Entity {
 	}
 	//Return the converted spot..
 	public int getUSpot() {
-		return 48 - uSpot;
+		return u.getRack().getRackSize() - u.getSpot();
 	}
 	
-	public void setSpot(int i) {
-		this.uSpot = i;
+	public void setSpot(Unit u) {
+		this.u = u;
 		//Make sure we change the postion of the vector
-		postion.y = getUSpot() * 20 + 40;
+		postion = new Vector2(900, u.getSpot() * 20 + 10);
 	}
 	
 	
@@ -92,6 +88,15 @@ public class Server extends Entity {
 			}
 		}
 		return null;
+	}
+	
+	
+	public boolean isInRack() {
+		return u != null && u.getRack() != null;
+	}
+	
+	public Unit getUnit() {
+		return u;
 	}
 
 }
