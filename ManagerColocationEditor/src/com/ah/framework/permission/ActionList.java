@@ -1,6 +1,7 @@
 package com.ah.framework.permission;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class ActionList {
@@ -20,6 +21,10 @@ public class ActionList {
 	
 	public void remove(Action action) {
 		actions.remove(action);
+	}
+	
+	public void add(Action[] actions) {
+		this.actions.addAll(Arrays.asList(actions));
 	}
 
 }

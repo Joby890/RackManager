@@ -34,5 +34,21 @@ public class Unit {
 	public Server getServer() {
 		return server;
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if(obj instanceof Unit) {
+			Unit u = (Unit) obj;
+			if(u.getSpot() == getSpot() || u.getRack().equals(getRack())) {
+				return true;
+			}
+		} else if(obj instanceof Integer) {
+			Integer i = (Integer) obj;
+			if(i == getSpot()) {
+				return true;
+			}
+		}
+		return false;
+	}
 
 }

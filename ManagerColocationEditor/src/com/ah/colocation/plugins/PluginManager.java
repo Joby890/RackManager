@@ -11,16 +11,10 @@ public class PluginManager {
 
 	public void init() {
 		File pluginDir = new File("./plugins");
-		if(!pluginDir.exists()) {
-			pluginDir.mkdir();
-		}
-		for(File f : pluginDir.listFiles()) {
-			if(f.isFile()) {
-				if(f.getName().endsWith(".jar")) {
-					
-				}
-			}
-		}
+	}
+	
+	public void loadPlugins(File directory) {
+		
 	}
 
 }

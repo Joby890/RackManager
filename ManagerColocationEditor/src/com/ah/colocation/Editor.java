@@ -2,9 +2,6 @@ package com.ah.colocation;
 
 import com.ah.colocation.managered.ManageredEditor;
 import com.ah.framework.Framework;
-import com.ah.framework.User;
-import com.ah.framework.admix.AdmixUser;
-import com.ah.framework.permission.Action;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL10;
@@ -16,15 +13,13 @@ public class Editor implements ApplicationListener {
 
 	@Override
 	public void create() {
+		//Init the plugin manager
+		Framework.getPluginManager().init();
+		
+		
 		batch = new SpriteBatch();
 		
-
-		User u = Framework.getUserManager().newUser("1jf7fjh6");
-		u.addPermission("U10", Action.EXECUTE);
-		u.addPermission("U10", Action.READ);
-		u.addPermission("U10", Action.WRITE);
-		
-		Framework.getSceneManager().setSceneRunning(Framework.getSceneManager().registerScene(new ManageredEditor(u)), true);
+		Framework.getSceneManager().setSceneRunning(Framework.getSceneManager().registerScene(new ManageredEditor()), true);
 
 	}
 

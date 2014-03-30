@@ -11,22 +11,20 @@ import com.ah.colocation.managered.server.parts.cpu.CPU;
 import com.ah.framework.BackRound;
 import com.ah.framework.Framework;
 import com.ah.framework.Scene;
-import com.badlogic.gdx.Gdx;
+import com.ah.framework.User;
+import com.ah.framework.permission.Action;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 public class ServerEditor extends Scene {
 
 	private BackRound backround;
 	private Server current;
 	private ManageredEditor me;
+	@SuppressWarnings("unused")
 	private List<Part> parts;
+	private User currentu;
 
 	@Override
 	public void start() {
@@ -75,6 +73,9 @@ public class ServerEditor extends Scene {
 			close(current);
 		} else {
 			//Case
+			if(!currentu.hasPermission(Action.CHANGE_CASE, current.getUnit())) {
+				return;
+			}
 			if(current.getPart("case") == null){
 				BitmapFont font = new BitmapFont();
 				font.draw(batch, "Please pick a case!", 0, 0);
@@ -83,6 +84,9 @@ public class ServerEditor extends Scene {
 				Case caze = (Case) current.getPart("case");
 				batch.draw(caze.getTexture(), caze.getPostion().x, caze.getPostion().y);
 				//Motherboard
+				if(!currentu.hasPermission(Action.CHANGE_MOTHERBOARD, current.getUnit())) {
+					return;
+				}
 				if(current.getPart("motherboard") == null) {
 					BitmapFont font = new BitmapFont();
 					font.draw(batch, "Please select a motherboard", caze.getMotherBoardSpot().x, caze.getMotherBoardSpot().y);
@@ -91,6 +95,9 @@ public class ServerEditor extends Scene {
 					MotherBoard mb = (MotherBoard) current.getPart("motherboard");
 					batch.draw(mb.getTexture(), mb.getPostion().x, mb.getPostion().y);
 					//CPU
+					if(!currentu.hasPermission(Action.CHANGE_CPU, current.getUnit())) {
+						return;
+					}
 					if(current.getPart("cpu") == null) {
 						BitmapFont font = new BitmapFont();
 						font.draw(batch, "Please select a CPU.", mb.getCpuPosition(1).x, mb.getCpuPosition(1).y);
@@ -109,13 +116,14 @@ public class ServerEditor extends Scene {
 
 	}
 	
-	private Stage stage;
+	/*private Stage stage;
 	private TextButton button;
-	private int i;
+	private int i;*/
+
 
 	@Override
 	public void onSceneChange(Boolean bol) {
-		if(false) {
+		/*if(false) {
 			Skin skin =new Skin(Gdx.files.internal("data/uiskin.json"));
 			stage = new Stage();
 			button = new TextButton("Test Me", skin);
@@ -129,15 +137,17 @@ public class ServerEditor extends Scene {
 			});
 			
 			
-		}
+		}*/
 	}
 
 	public void load(ManageredEditor me, Server s) {
 		this.me = me;
+		current = s;
 		Framework.getSceneManager().setSceneRunning(me, false);
 		Framework.getSceneManager().setSceneRunning(this, true);
-		current = s;
+
 		parts = Framework.getPartManager().getPartsForServer(current);
+		currentu = me.currentUser;
 		
 	}
 	

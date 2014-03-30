@@ -20,7 +20,6 @@ public class Framework {
 		partsmanager.starting();
 		um = new com.ah.framework.admix.UserManager();
 		pm = new PluginManager();
-		pm.init();
 	}
 
 	public static SceneManager getSceneManager(){

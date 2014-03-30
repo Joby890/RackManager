@@ -2,8 +2,15 @@ package com.ah.framework.permission;
 
 public enum Action {
 
-	WRITE,
-	READ,
-	EXECUTE,
+	OPEN,
+	SEE,
+	CHANGE_CPU,
+	CHANGE_MEMORY,
+	CHANGE_DRIVE,
+	CHANGE_MOTHERBOARD,
+	CHANGE_CASE,
+	CHANGE_POWERSUPLY,
+	CHANGE_ETHERNET,
+	CHANGE_IPBLOCKS,
 	
 }
