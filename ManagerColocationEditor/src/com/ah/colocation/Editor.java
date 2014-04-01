@@ -16,7 +16,6 @@ public class Editor implements ApplicationListener {
 		//Init the plugin manager
 		Framework.getPluginManager().init();
 		
-		
 		batch = new SpriteBatch();
 		
 		Framework.getSceneManager().setSceneRunning(Framework.getSceneManager().registerScene(new ManageredEditor()), true);

@@ -10,7 +10,21 @@ public class PluginManager {
 	
 
 	public void init() {
-		File pluginDir = new File("./plugins");
+		final File pluginDir = new File("./plugins");
+		plugins.add(new Plugin() {
+			
+			@Override
+			public void onEnable() {
+				pluginDir.canExecute();
+				
+			}
+			
+			@Override
+			public void onDisable() {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 	}
 	
 	public void loadPlugins(File directory) {

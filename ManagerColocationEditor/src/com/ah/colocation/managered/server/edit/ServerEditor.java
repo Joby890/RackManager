@@ -13,6 +13,7 @@ import com.ah.framework.Framework;
 import com.ah.framework.Scene;
 import com.ah.framework.User;
 import com.ah.framework.permission.Action;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
@@ -28,16 +29,7 @@ public class ServerEditor extends Scene {
 
 	@Override
 	public void start() {
-		backround = new BackRound("data/libgdx.png", new Vector2(0, 0));
-		/*Object[] objs = new Object[47];
-		for(int i = 0; i < 47; i++) {
-			objs[i] = i;
-		}
-		ListStyle style = new ListStyle();
-		style.selection = 
-		style.font = new BitmapFont();
-		com.badlogic.gdx.scenes.scene2d.ui.List list = new com.badlogic.gdx.scenes.scene2d.ui.List(objs, style);
-		list.setVisible(true);*/
+		backround = new BackRound("data/editor.png", new Vector2(0, 0));
 	}
 
 	@Override
@@ -68,7 +60,7 @@ public class ServerEditor extends Scene {
 
 	@Override
 	public void render(SpriteBatch batch, Double delta) {
-		
+
 		if(current == null) {
 			close(current);
 		} else {
@@ -78,7 +70,8 @@ public class ServerEditor extends Scene {
 			}
 			if(current.getPart("case") == null){
 				BitmapFont font = new BitmapFont();
-				font.draw(batch, "Please pick a case!", 0, 0);
+				font.setColor(Color.WHITE);
+				font.draw(batch, "Please pick a case!", 50, 50);
 				return;
 			} else {
 				Case caze = (Case) current.getPart("case");
@@ -115,29 +108,10 @@ public class ServerEditor extends Scene {
 		
 
 	}
-	
-	/*private Stage stage;
-	private TextButton button;
-	private int i;*/
 
 
 	@Override
 	public void onSceneChange(Boolean bol) {
-		/*if(false) {
-			Skin skin =new Skin(Gdx.files.internal("data/uiskin.json"));
-			stage = new Stage();
-			button = new TextButton("Test Me", skin);
-			stage.addActor(button);
-			button.addListener(new ClickListener() {
-				@Override
-				public void clicked(InputEvent event, float x, float y) {
-					i++;
-					button.setText("Clicked " + i + "times.");
-				}
-			});
-			
-			
-		}*/
 	}
 
 	public void load(ManageredEditor me, Server s) {

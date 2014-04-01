@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import com.ah.colocation.managered.server.caze.CSE512L200B;
+import com.ah.colocation.managered.server.motherboard.MBDX9SCLFO;
 import com.ah.colocation.managered.server.parts.cpu.E31230V2;
 import com.ah.framework.Entity;
 import com.ah.framework.Scene;
@@ -39,8 +41,8 @@ public class Server extends Entity {
 
 		texture = new Texture("data/server.png");
 		currentParts.put("cpu", new E31230V2(this));
-		//currentParts.put("motherboard", new MBDX9SCLFO(this));
-		//currentParts.put("case", new CSE512L200B(this));
+		currentParts.put("motherboard", new MBDX9SCLFO(this));
+		currentParts.put("case", new CSE512L200B(this));
 		
 	}
 

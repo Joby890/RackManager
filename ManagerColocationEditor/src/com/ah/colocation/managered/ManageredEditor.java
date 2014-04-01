@@ -61,14 +61,9 @@ public class ManageredEditor extends Scene {
 			for(Entity e : Framework.getEntityManager().getEntityWithClass(Server.class)) {
 				Server s = (Server) e;
 				Vector2 pos = e.getPostion();
-				
-				//System.out.println("Clicked at checking " + y + pos.y);
 				if(inRange((double) (x - pos.x) + 800, 800, 1050)) {
 					double d = (y - 60) / 20D;
 					boolean b = inRange(d, s.getUSpot(), s.getUSpot() + 1);
-					//System.out.println(d + " Spot: " + s.getUSpot());
-					//System.out.println("Checking if is in ranage of " + (s.getUSpot()  + 40) + " to " + (s.getUSpot() + 60) + " postion was " +  (y / 20) + ". It returned " + b);
-					
 					if(b) {
 						units.clear();
 						if(currentUser.hasPermission(Action.OPEN, s.getUnit())) {
@@ -88,7 +83,6 @@ public class ManageredEditor extends Scene {
 	}
 	
 	private boolean inRange(Double i, int min, int max) {
-		//System.out.println("Checking " + i + "with min " + min + " with max " + max);
 		return i > min && i < max;
 	}
 	

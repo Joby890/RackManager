@@ -12,6 +12,7 @@ public class E31230V2 extends CPU {
 
 	public E31230V2(Server server) {
 		super(server);
+		texture = new Texture("data/E31230V2.png");
 	}
 
 	@Override

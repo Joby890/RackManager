@@ -7,14 +7,23 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 
 public class CSE512L200B extends Case {
+	
+	private Vector2 mbvec;
+	private Vector2 drive1;
+	private Vector2 drive2;
+	private Vector2 pos;
 
 	public CSE512L200B(Server server) {
 		super(server);
+		mbvec = new Vector2(227, 218);
+		drive1 = new Vector2(20, 300);
+		drive2 = new Vector2(500, 300);
+		pos = new Vector2(500, 300);
 	}
 
 	@Override
 	public Vector2 getMotherBoardSpot() {
-		return new Vector2(20, 20);
+		return mbvec;
 	}
 
 	@Override
@@ -23,9 +32,9 @@ public class CSE512L200B extends Case {
 			return null;
 		}
 		if(spot == 1) {
-			return new Vector2(20, 300);
+			return drive1;
 		} else {
-			return new Vector2(500, 300);
+			return drive2;
 		}
 		
 	}
@@ -52,7 +61,7 @@ public class CSE512L200B extends Case {
 
 	@Override
 	public Vector2 getPostion() {
-		return new Vector2(0, 0);
+		return pos;
 	}
 
 	@Override
