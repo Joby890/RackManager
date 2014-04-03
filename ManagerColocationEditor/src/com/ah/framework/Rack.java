@@ -13,8 +13,7 @@ public class Rack {
 	
 	public Rack(int size) {
 		for(int i = 0; i < size; i++) {
-			Unit u = new Unit(this, i);
-			units.add(u);
+			units.add(new Unit(this, i));
 		}
 	}
 	
