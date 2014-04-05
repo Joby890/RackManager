@@ -13,6 +13,7 @@ public class AdmixUser extends User {
 
 	private Map<Unit, ActionList> actions = new HashMap<Unit, ActionList>();
 	private String id;
+	private int i = new Random().nextInt(47);
 
 	@Override
 	public void addPermission(Unit u, Action action) {
@@ -62,7 +63,7 @@ public class AdmixUser extends User {
 
 	@Override
 	public int getRackSize() {
-		return new Random().nextInt(47);
+		return i;
 	}
 
 	@Override

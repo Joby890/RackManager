@@ -35,29 +35,30 @@ public class Editor implements ApplicationListener {
 		}
 	}
 
-	
+	private long last = System.nanoTime();
+
 	@Override
 	public void render() {
+
+		long current = System.nanoTime();
+		double d = (current - last) / (1000.0 * 1000);
 		Gdx.gl.glClearColor(1, 1, 1, 1);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 		batch.begin();
 		try {
 			//Tick
-			Framework.getSceneManager().tick(0.0D);
-			Framework.getEntityManager().tick(0.0D);
-			
+			Framework.getSceneManager().tick(d);
+			Framework.getEntityManager().tick(d);
+
 			//Render
-			Framework.getSceneManager().render(batch, 0.0D);
-			Framework.getEntityManager().render(batch, 0.0D);
+			Framework.getSceneManager().render(batch, d);
+			Framework.getEntityManager().render(batch, d);
 		} catch (Throwable t) {
 			System.out.println("CAUGHT: error thrown in render loop");
 			t.printStackTrace();
 		}
-
 		batch.end();
-
-		
-
+		last = current;
 	}
 
 	@Override

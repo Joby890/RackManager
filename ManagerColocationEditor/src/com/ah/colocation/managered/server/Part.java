@@ -9,9 +9,16 @@ public abstract class Part {
 	
 	private String uuid = UUID.randomUUID().toString();
 	private Server server;
+	private Texture texture;
 	
-	public Part(Server server) {
+	public Part(Server server, Texture texture) {
 		this.server = server;
+		this.texture = texture;
+	}
+	
+	public Part(Server server, String texture) {
+		this.server = server;
+		this.texture = new Texture(texture);
 	}
 	
 
@@ -27,7 +34,9 @@ public abstract class Part {
 		return server;
 	}
 	
-	public abstract Texture getTexture();
+	public Texture getTexture() {
+		return texture;
+	}
 	public abstract int getLayer();
 	public abstract Vector2 getPostion();
 	public abstract String getName();

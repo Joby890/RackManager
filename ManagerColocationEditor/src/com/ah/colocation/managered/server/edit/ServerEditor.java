@@ -8,14 +8,18 @@ import com.ah.colocation.managered.server.Server;
 import com.ah.colocation.managered.server.caze.Case;
 import com.ah.colocation.managered.server.motherboard.MotherBoard;
 import com.ah.colocation.managered.server.parts.cpu.CPU;
+import com.ah.colocation.util.SimpleButton;
 import com.ah.framework.BackRound;
 import com.ah.framework.Framework;
 import com.ah.framework.Scene;
 import com.ah.framework.User;
 import com.ah.framework.permission.Action;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.badlogic.gdx.math.Vector2;
 
 public class ServerEditor extends Scene {
@@ -26,10 +30,29 @@ public class ServerEditor extends Scene {
 	@SuppressWarnings("unused")
 	private List<Part> parts;
 	private User currentu;
+	
+	
+	private SimpleButton save;
+	private boolean wasTouched;
 
 	@Override
 	public void start() {
 		backround = new BackRound("data/editor.png", new Vector2(0, 0));
+		save = new SimpleButton("Save Server", new BitmapFont());
+		save.setWidth(100);
+		save.setHeight(100);
+		//save.leftOn(0);
+		//save.bottomOn(1.0f);
+		save.setAlignment(HAlignment.CENTER);
+
+	}
+
+	private void updateButtons(double delta) {
+		boolean justTouched = Gdx.input.justTouched();
+		boolean isTouched = Gdx.input.isTouched();
+		boolean justReleased = wasTouched && !isTouched;
+		wasTouched = isTouched;
+		save.update((float) delta, justTouched, isTouched, justReleased, Gdx.input.getX(), Gdx.input.getY());
 	}
 
 	@Override
@@ -39,12 +62,19 @@ public class ServerEditor extends Scene {
 
 	@Override
 	public void tick(double delta) {
+		if(Gdx.input.isKeyPressed(Keys.ESCAPE)) {
+			close(current);
+		}
+		updateButtons(delta);
 		if(current == null) {
 			close(current);
 		} else {
 			if(current.getPart("case") == null){
 				
 			}
+		}
+		if(save.wasPressed()) {
+			System.out.println("Pressed");
 		}
 	}
 
@@ -106,7 +136,7 @@ public class ServerEditor extends Scene {
 			
 		}
 		
-
+		save.draw(batch);
 	}
 
 
@@ -128,10 +158,9 @@ public class ServerEditor extends Scene {
 	public void close(Server server) {
 		if(server != null) {
 			
-		} else {
-			Framework.getSceneManager().setSceneRunning(me, true);
-			Framework.getSceneManager().setSceneRunning(this, false);
 		}
+		Framework.getSceneManager().setSceneRunning(me, true);
+		Framework.getSceneManager().setSceneRunning(this, false);
 	}
 
 }

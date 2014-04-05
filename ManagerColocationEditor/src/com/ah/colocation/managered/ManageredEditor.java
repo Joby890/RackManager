@@ -25,10 +25,11 @@ public class ManageredEditor extends Scene {
 	private String sercereditorid;
 	private List<String> units;
 	public User currentUser;
+	private int adjust;
 	
 
 	public ManageredEditor() {
-		this.currentUser = Framework.getUserManager().newUser("joby890");
+		this.currentUser = Framework.getUserManager().newUser("Joby890");
 	}
 
 	@Override
@@ -54,6 +55,7 @@ public class ManageredEditor extends Scene {
 
 	@Override
 	public void tick(double delta) {
+
 		if(Gdx.input.isTouched()) {
 			int x = Gdx.input.getX();
 			double y = (double) Gdx.input.getY();
@@ -107,11 +109,14 @@ public class ManageredEditor extends Scene {
 
 	@Override
 	public void render(SpriteBatch batch, Double delta) {
+		getBackRound().setX(getBackRound().getX() + adjust);
+		getBackRound().setY(getBackRound().getY() + adjust);
+		adjust = 0;
 		BitmapFont font = new BitmapFont();
 		font.setColor(Color.BLACK);
 		User[] users = Framework.getUserManager().getCurrentUsers();
 		for(int i = 0; i < users.length; i++) {
-			font.draw(batch, users[i].getName(), 100, Gdx.graphics.getHeight() - (i * 20));
+			font.draw(batch, users[i].getName() + ": " + users[i].getRackSize()+ ". Delta " + delta + ".", 100, Gdx.graphics.getHeight() - (i * 20));
 		}
 		for(int i = 1; i < units.size() + 1; i++) {
 			font.draw(batch, units.get(i - 1), 100, Gdx.graphics.getHeight() - (i * 40));

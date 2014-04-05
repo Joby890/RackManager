@@ -8,18 +8,10 @@ import com.badlogic.gdx.math.Vector2;
 
 public class E31230V2 extends CPU {
 
-	private Texture texture;
-
 	public E31230V2(Server server) {
-		super(server);
-		texture = new Texture("data/E31230V2.png");
+		super(server, new Texture("data/E31230V2.png"));
 	}
-
-	@Override
-	public Texture getTexture() {
-		return texture;
-	}
-
+	
 	@Override
 	public int getLayer() {
 		return 5;

@@ -11,13 +11,11 @@ import com.badlogic.gdx.math.Vector2;
 
 public class MBDX9SCLFO extends MotherBoard {
 	
-	private Texture texture;
 	private Vector2 vecCpu;
 	private Map<Integer, Vector2> vecs;
 
 	public MBDX9SCLFO(Server server) {
-		super(server);
-		texture = new Texture("data/MBDX9SCLFO.png");
+		super(server, new Texture("data/MBDX9SCLFO.png"));
 		vecCpu = new Vector2(375, 375);
 		vecs = new HashMap<Integer, Vector2>();
 	}
@@ -43,10 +41,6 @@ public class MBDX9SCLFO extends MotherBoard {
 		return vecs.get(spot);
 	}
 
-	@Override
-	public Texture getTexture() {
-		return texture;
-	}
 
 	@Override
 	public int getLayer() {

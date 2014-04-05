@@ -12,15 +12,13 @@ public class CSE512L200B extends Case {
 	private Vector2 drive1;
 	private Vector2 drive2;
 	private Vector2 pos;
-	private Texture texture;
 
 	public CSE512L200B(Server server) {
-		super(server);
+		super(server, new Texture("data/CSE512L200B.png"));
 		mbvec = new Vector2(227, 218);
 		drive1 = new Vector2(20, 300);
 		drive2 = new Vector2(500, 300);
 		pos = new Vector2(500, 300);
-		texture = new Texture("data/CSE512L200B.png");
 	}
 
 	@Override
@@ -49,11 +47,6 @@ public class CSE512L200B extends Case {
 	@Override
 	public int getMaxDrives() {
 		return 2;
-	}
-
-	@Override
-	public Texture getTexture() {
-		return texture;
 	}
 
 	@Override
